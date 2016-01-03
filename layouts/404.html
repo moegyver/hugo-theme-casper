@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
 
 {{if .Site.Params.cover}}
-<header class="main-header " style="background-image: url({{.Site.BaseURL}}{{.Site.Params.cover}})">
+<header class="main-header " style="background-image: url({{.Site.BaseURL}}{{.Site.Params.notfoundcover}})">
 {{else}}
 <header class="main-header no-cover">
 {{end}}
@@ -52,9 +52,8 @@
 <main id="content" class="content" role="main">
 
   <article class="post">
-    <h1>404 Not Found</h1>
-    <p>Sorry, but we couldn't find the page you're looking for.</p>
-    <p>Please head back <a href="/">home</a>.</p>
+  <h1>{{ .Site.Params.notfoundtitle }}</h1>
+  {{ .Site.Params.notfoundtext | markdownify }}
   </article>
 
 {{ partial "footer.html" . }}
