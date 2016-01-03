@@ -53,7 +53,7 @@
         {{ $currentNode := . }}
         {{ range .Site.Menus.main }}
         {{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .)}}
-        <li><a href="{{.URL}}">{{.Name}}</a></li>
+        <!-- <li><a href="{{.URL}}">{{.Name}}</a></li> -->
               {{ range .Children }}
               {{ if .HasChildren }}
               {{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .)}}
@@ -143,16 +143,18 @@
 
 </nav>
 {{end}}
-
+{{ if eq .Params.contactform true }}
+        {{ partial "contact-form.html" . }}
+{{ end }}
     </section>
 
 
   <footer class="post-footer">
 
 
-    {{if .Site.Params.logo}}
+    {{if .Site.Params.thumbnail}}
     <figure class="author-image">
-        <a class="img" href="{{.Site.BaseURL}}" style="background-image: url({{ $baseurl }}{{.Site.Params.logo}})"><span class="hidden">{{.Site.Params.author}}'s Picture</span></a>
+        <a class="img" href="{{.Site.BaseURL}}" style="background-image: url({{ $baseurl }}{{.Site.Params.thumbnail}})"><span class="hidden">{{.Site.Params.author}}'s Picture</span></a>
     </figure>
     {{end}}
 
