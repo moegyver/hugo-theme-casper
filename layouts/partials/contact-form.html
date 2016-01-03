@@ -1,0 +1,76 @@
+<!--        <form role="form" id="feedback-form" action="javascript:send();">
+            <div class="form-group">
+                <label for="name">Your name: <span class="form-hint">(optional, but would be nice to know)</span></label>
+                <input type="text" class="form-control" name="name" />
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact: <span class="form-hint">(optional, e-mail or twitter or so)</span></label>
+                <input type="text" class="form-control" name="contact" />
+            </div>
+            <div class="form-group">
+                <label>Can I quote you on this?</label>
+                <select name="publish">
+                    <option value="Sure thing!">Sure thing!</option>
+                    <option value="Contact me first.">Contact me first.</option>
+                    <option value="No way!">No way!</option>
+                </select>
+                <p class="form-hint">I'll respect your wishes unless you send something nasty.</p>
+            </div>
+            <div class="form-group">
+                <label for="message">Your message: <span id="form-error-message" class="form-error">Haven't you forgotten something?</span></label>
+                <textarea class="form-control" id="message" name="message"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="nospam">Testing for robots: <span id="form-error-nospam" class="form-error">You sure you're not a robot?</span></label>
+                <div class="g-recaptcha" data-sitekey="6LedOw8TAAAAAGLExM100wJtkFc6BxKM_2tuEpXf"></div>
+            </div>
+            <button type="submit" id="submit" class="btn btn-default">Submit</button>
+        </form>
+        <script>
+function callAPI(stuff) {
+    data = JSON.stringify(stuff)
+    $.ajax({
+        type: 'POST',
+        url: "https://23xcgxat34.execute-api.eu-west-1.amazonaws.com/prod/sendfeedback",
+        data: data,
+        contentType : 'application/json; charset=utf-8',
+        success: function(data, statusText, obj) {
+            alert(data);
+            alert(statusText);
+            // data = JSON.parse(data);
+            if (data['success'] == true) {
+                window.open("/thanks","_self")
+            } else {
+                $('#form-error-nospam').show();
+            }
+        },
+        error: function(obj, statusText, error) {
+            alert("Whoops! That didn't work! I blame AWS!");
+        }});
+};
+function emptyForm() {
+    $('#form-error-nospam').hide();
+    $("#form-error-message").hide();
+    $("#feedback-form").reset();
+};
+function send() {
+    $('#form-error-nospam').hide();
+    $("#form-error-message").hide();
+    var errors = 0;
+    var v = grecaptcha.getResponse();
+    if(v.length == 0)
+    {
+        $('#form-error-nospam').show();
+        errors++;
+    }
+    if ($("#message").val().length == 0) {
+        $("#form-error-message").show();
+        errors++;
+    }
+    if (errors == 0) {
+        var data = {"recaptcha": v, "name": $("input[name=name]").val(), "contact": $("input[name=contact]").val(), "publish": $("select[name=publish]").val(), "message": $("textarea[name=message]").val()};
+        callAPI(data);
+    }
+};
+        </script>
+        -->
