@@ -31,13 +31,10 @@ function callAPI(stuff) {
     data = JSON.stringify(stuff)
     $.ajax({
         type: 'POST',
-        url: "https://23xcgxat34.execute-api.eu-west-1.amazonaws.com/prod/sendfeedback",
+        url: "https://jkrry7s4og.execute-api.eu-west-1.amazonaws.com/prod/send",
         data: data,
         contentType : 'application/json; charset=utf-8',
         success: function(data, statusText, obj) {
-            alert(data);
-            alert(statusText);
-            // data = JSON.parse(data);
             if (data['success'] == true) {
                 window.open("/thank-you/","_self")
             } else {
